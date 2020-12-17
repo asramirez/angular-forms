@@ -1,0 +1,155 @@
+<div class="container mt-5">
+
+       <div class="row">
+              <div class="col-md-6">
+                     <form [formGroup]='form'
+                           (ngSubmit)='save()'>
+
+                            <div class="form-group">
+                                   <label for="name">Name :: <b>{{formControlName.value}}</b></label>
+                                   <input formControlName='name'
+                                          [class.is-valid]="isNameFieldValid && isNameFieldTouched"
+                                          [class.is-invalid]="isNameFieldInvalid && isNameFieldTouched"
+                                          type="text"
+                                          class="form-control"
+                                          id="name"
+                                          aria-describedby="nameHelp"
+                                          placeholder="Enter your name">
+                                   <small id="nameHelp"
+                                          class="form-text text-muted">Type your name here.</small>
+
+                                   <div class="messages"
+                                        [class.active]="isNameFieldInvalid && isNameFieldTouched">
+                                          <small *ngIf="formControlName.hasError('required')"
+                                                 class="form-text text-muted">This field is required.</small>
+
+                                          <small *ngIf="formControlName.hasError('minlength')"
+                                                 class="form-text text-muted">This field min length is 5.</small>
+                                          <small *ngIf="formControlName.hasError('pattern')"
+                                                 class="form-text text-muted">This field cane not be contain special
+                                                 digit or number, only letters</small>
+                                   </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                   <label for="email">Email :: <b>{{formControlEmail.value}}</b></label>
+                                   <input formControlName='email'
+                                          [class.is-valid]="isEmailFieldValid && isEmailFieldTouched"
+                                          [class.is-invalid]="isEmailFieldInvalid && isEmailFieldTouched"
+                                          type="email"
+                                          class="form-control"
+                                          id="email"
+                                          aria-describedby="emailHelp"
+                                          placeholder="Enter your email">
+                                   <small id="emailHelp"
+                                          class="form-text text-muted">Type your email here.</small>
+
+                                   <div class="messages"
+                                        [class.active]="isEmailFieldInvalid && isEmailFieldTouched">
+                                          <small *ngIf="formControlEmail.hasError('required')"
+                                                 class="form-text text-muted">This field is required.</small>
+
+                                          <small *ngIf="formControlEmail.hasError('email')"
+                                                 class="form-text text-muted">This field is not a email valid.</small>
+                                   </div>
+                            </div>
+
+                            <div class="form-group"
+                                 formGroupName="address">
+                                   <label for="street">Street :: <b>{{formControlAddress.value}}</b></label>
+                                   <input formControlName='street'
+                                          [class.is-valid]="isStreetFieldValid && isStreetFieldTouched"
+                                          [class.is-invalid]="isStreetFieldInvalid && isStreetFieldTouched"
+                                          type="text"
+                                          class="form-control"
+                                          id="street"
+                                          aria-describedby="streepHelp"
+                                          placeholder="Enter your address street">
+                                   <small id="streetHelp"
+                                          class="form-text text-muted">Type your street here.</small>
+
+                                   <div class="messages"
+                                        [class.active]="isStreetFieldInvalid && isStreetFieldTouched">
+                                          <small *ngIf="formControlAddress.hasError('required')"
+                                                 class="form-text text-muted">This field is required.</small>
+
+                                          <small *ngIf="formControlAddress.hasError('email')"
+                                                 class="form-text text-muted">This field is not a email valid.</small>
+                                   </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                   <label for="password">Password :: <b>{{formControlPassword.value}}</b></label>
+                                   <input formControlName='password'
+                                          id="password"
+                                          [class.is-valid]="formControlPassword.valid && formControlPassword.touched"
+                                          [class.is-invalid]="formControlPassword.invalid && formControlPassword.touched"
+                                          type="password"
+                                          class="form-control"
+                                          aria-describedby="passwordHelp"
+                                          placeholder="Enter your password">
+                                   <small id="passwordHelp"
+                                          class="form-text text-muted">Type your password here.</small>
+
+                                   <div class="messages"
+                                        [class.active]="formControlPassword.invalid && formControlPassword.touched">
+                                          <small *ngIf="formControlPassword.hasError('invalid_password')"
+                                                 class="form-text text-muted">This password must be contain a
+                                                 number.</small>
+
+                                   </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                   <label for="passwordConfirm">Confirm Password ::
+                                          <b>{{formControlConfirmPassword.value}}</b></label>
+                                   <input formControlName='confirmPassword'
+                                          id="passwordConfirm"
+                                          [class.is-valid]="formControlConfirmPassword.valid && formControlConfirmPassword.touched"
+                                          [class.is-invalid]="formControlConfirmPassword.invalid && formControlConfirmPassword.touched 
+                                          || (form.errors && form.hasError('not_match_password') && formControlConfirmPassword.touched)"
+                                          type="password"
+                                          class="form-control"
+                                          aria-describedby="passwordHelp"
+                                          placeholder="Enter your password">
+                                   <small id="passwordHelp"
+                                          class="form-text text-muted">Confirm password.</small>
+
+                                   <div class="messages"
+                                        [class.active]="formControlConfirmPassword.invalid && formControlConfirmPassword.touched">
+                                          <small *ngIf="formControlConfirmPassword.hasError('invalid_password')"
+                                                 class="form-text text-muted">This password must be contain a
+                                                 number.</small>
+
+
+                                   </div>
+
+                                   <div class="messages"
+                                        [class.active]="form.errors && formControlConfirmPassword.touched">
+
+                                          <small *ngIf="form.hasError('not_match_password')"
+                                                 class="form-text text-muted">
+                                                 Password not match
+                                                 .</small>
+                                   </div>
+
+                            </div>
+
+
+
+
+                            <button class="btn btn-info"
+                                    type="submit">Save</button>
+                     </form>
+              </div>
+
+              <div class="col-md-3">
+                     <p class="mt-3">Values To Json</p>
+                     <hr>
+                     <code><pre>Field: {{form.value | json}}</pre></code>
+              </div>
+       </div>
+</div>
