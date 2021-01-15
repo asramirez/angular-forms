@@ -139,6 +139,52 @@
                             </div>
 
 
+                            <div class="form-group">
+
+                                   <label>Select a type :: <b>{{formControlType.value}}</b></label>
+
+                                   <br>
+                                   <div class="form-check form-check-inline">
+
+                                          <label>
+                                                 <input type="radio"
+                                                        value="company"
+                                                        formControlName="type">
+                                                 <span> Company</span>
+                                          </label>
+                                   </div>
+                                   <div class="form-check form-check-inline">
+
+
+                                          <label>
+                                                 <input type="radio"
+                                                        value="customer"
+                                                        formControlName="type">
+                                                 <span> Customer</span>
+                                          </label>
+                                   </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                   <label for="password">Company Name :: <b>{{formControlCompany.value}}</b></label>
+                                   <input formControlName='companyName'
+                                          [class.is-valid]="formControlCompany.valid && formControlCompany.touched"
+                                          [class.is-invalid]="formControlCompany.invalid && formControlCompany.touched"
+                                          type="text"
+                                          class="form-control"
+                                          aria-describedby="companyHelp"
+                                          placeholder="Enter your company name">
+                                   <small id="passwordHelp"
+                                          class="form-text text-muted">Type your company name here.</small>
+
+                                   <div class="messages"
+                                        [class.active]="formControlCompany.invalid && formControlCompany.touched">
+                                          <small *ngIf="formControlCompany.hasError('required')"
+                                                 class="form-text text-muted">This field is required</small>
+
+                                   </div>
+                            </div>
 
 
                             <button class="btn btn-info"

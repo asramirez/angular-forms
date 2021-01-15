@@ -1,0 +1,98 @@
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="col-md-3">
+      <h4>Listado de categorias</h4>
+
+      <p *ngFor="let item of categories">
+        {{item.name}}
+      </p>
+    </div>
+
+
+    <div class="col-md-9">
+      <form [formGroup]='form'>
+
+        <div class="form-group">
+          <label>Category name :: <b>{{nameField.value}}</b></label>
+          <input formControlName='name'
+                 [class.is-valid]="nameField.valid && nameField.touched"
+                 [class.is-invalid]="nameField.invalid && nameField.touched"
+                 type="text"
+                 class="form-control"
+                 placeholder="Enter your category name">
+          <small class="form-text text-muted">Type your category name here.</small>
+
+          <div class="messages"
+               [class.active]="nameField.invalid && nameField.touched">
+            <small *ngIf="nameField.hasError('required')"
+                   class="form-text text-muted">This field is required</small>
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Image :: <b>{{imageField.value}}</b></label>
+          <input formControlName='image'
+                 [class.is-valid]="imageField.valid && imageField.touched"
+                 [class.is-invalid]="imageField.invalid && imageField.touched"
+                 type="text"
+                 class="form-control"
+                 placeholder="Enter url image">
+          <small class="form-text text-muted">Type your url image here.</small>
+
+          <div class="messages"
+               [class.active]="imageField.invalid && imageField.touched">
+            <small *ngIf="imageField.hasError('required')"
+                   class="form-text text-muted">This field is required</small>
+
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label>Description :: <b>{{descriptionField.value}}</b></label>
+          <input formControlName='description'
+                 [class.is-valid]="descriptionField.valid && descriptionField.touched"
+                 [class.is-invalid]="descriptionField.invalid && descriptionField.touched"
+                 type="text"
+                 class="form-control"
+                 placeholder="Enter category description">
+          <small class="form-text text-muted">Type your description here.</small>
+
+          <div class="messages"
+               [class.active]="descriptionField.invalid && descriptionField.touched">
+            <small *ngIf="descriptionField.hasError('required')"
+                   class="form-text text-muted">This field is required</small>
+
+          </div>
+        </div>
+
+
+        <!--
+
+        <quill-editor [styles]='editorStyle'
+                      [modules]='config'
+                      formControlName='description'></quill-editor>
+
+        <br>
+
+        <quill-view-html [content]="descriptionField.value"
+                         theme="snow"></quill-view-html>
+
+        <p>{{descriptionField.value}}</p> -->
+
+
+
+
+
+      </form>
+    </div>
+
+
+  </div>
+
+
+
+
+</div>

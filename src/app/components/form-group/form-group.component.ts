@@ -26,13 +26,28 @@ export class FormGroupComponent implements OnInit {
           zip: new FormControl()
         }),
         password: new FormControl('', MyValidators.password),
-        confirmPassword: new FormControl('', MyValidators.password)
+        confirmPassword: new FormControl('', MyValidators.password),
+        type: new FormControl('company', [Validators.required]),
+        companyName: new FormControl('', [Validators.required])
 
       }, {
       validators: MyValidators.matchPassword
     }
 
     );
+
+    this.formControlType.valueChanges
+      .subscribe(value => {
+        console.log(value);
+        if (value === 'company') {
+          this.formControlCompany.setValidators([Validators.required])
+        } else {
+          this.formControlCompany.setValidators(null)
+        }
+
+        // actualiza y valida el valor
+        this.formControlCompany.updateValueAndValidity();
+      })
 
   }
 
@@ -80,10 +95,17 @@ export class FormGroupComponent implements OnInit {
     return this.form.get('password');
   }
 
-  get formControlConfirmPassword(){
+  get formControlConfirmPassword() {
     return this.form.get('confirmPassword');
   }
 
+  get formControlType() {
+    return this.form.get('type');
+  }
+
+  get formControlCompany() {
+    return this.form.get('companyName');
+  }
 
   get isStreetFieldValid() {
     return this.form.get('address.street').valid;
@@ -100,12 +122,12 @@ export class FormGroupComponent implements OnInit {
 
 
 
-
   save() {
     if (this.form.invalid) {
       this.form.controls.name.markAsTouched();
       this.form.controls.email.markAsTouched();
       this.form.controls.address.markAllAsTouched();
+      this.form.controls.password.markAsTouched();
       return;
     }
   }
