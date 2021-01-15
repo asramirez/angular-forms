@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { from } from 'rxjs';
 import { Category } from './category.interface';
 import { CategoryService } from './category.service'
+import { MyValidators } from '../../validators/password.validator'
 
 const modules = {
   toolbar: [
@@ -90,7 +90,7 @@ export class ExampleOneComponent implements OnInit {
 
   private buildForm() {
     this.form = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(4)], MyValidators.validateCategory(this.service)],
       image: ['', Validators.required],
       description: ['', Validators.required]
     })
