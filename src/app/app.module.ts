@@ -40,6 +40,10 @@ const routes: Routes = [
         path: 'example/1',
         component: ExampleOneComponent
       },
+      {
+        path: 'example/1/:id',
+        component: ExampleOneComponent
+      },
       
     ]
   }

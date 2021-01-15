@@ -15,6 +15,10 @@ export class CategoryService {
     return this.http.get<Category[]>(`${environment.url_api}/categories`);
   }
 
+  getCategory(id: string){
+    return this.http.get<Category>(`${environment.url_api}/categories/${id}`);
+  }
+
   checkCategory(name: string) {
     return this.http.post(`${environment.url_api}/categories/availability`, { name });
   }

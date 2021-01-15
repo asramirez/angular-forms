@@ -6,7 +6,7 @@
 
       <div *ngIf="categories; else load">
         <p *ngFor="let item of categories">
-          {{item.name}}
+          {{item.name}} / {{item._id}}
         </p>
       </div>
 
@@ -38,6 +38,9 @@
 
           </div>
         </div>
+
+
+        <img *ngIf="imageField.value"  [src]="imageField.value" alt="" height="200">
 
         <div class="form-group">
           <label>Image :: <b>{{imageField.value}}</b></label>

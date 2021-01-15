@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from './category.interface';
 import { CategoryService } from './category.service'
 import { MyValidators } from '../../validators/password.validator'
+import { ActivatedRoute, Params } from '@angular/router';
 
 const modules = {
   toolbar: [
@@ -69,22 +70,28 @@ export class ExampleOneComponent implements OnInit {
 
 
   form: FormGroup;
-
-
-
+  categoryId: string;
   categories: Category[];
 
-  constructor(private fb: FormBuilder, private service: CategoryService) {
+  constructor(
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private service: CategoryService) {
+
     this.buildForm();
 
     this.service.get().subscribe(data => {
       this.categories = data;
     });
-
-
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.categoryId = params.id;
+      if (this.categoryId) {
+        this.getCategory();
+      }
+    });
 
   }
 
@@ -94,6 +101,15 @@ export class ExampleOneComponent implements OnInit {
       image: ['', Validators.required],
       description: ['', Validators.required]
     })
+  }
+
+  private getCategory() {
+    this.service.getCategory(this.categoryId).subscribe(
+      (category: Category) => {
+        console.log(category);
+
+        this.form.patchValue(category);
+      });
   }
 
   get nameField() {
